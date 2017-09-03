@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="defaultCookieSerializer" class="org.springframework.session.web.http.DefaultCookieSerializer">
+        <property name="domainName" value="example.com"/>
+        <property name="cookieName" value="JSESSIONID"/>
+        <property name="cookiePath" value="/" />
+        <!-- <property name="domainNamePattern" value="^.+?\.(\w+\.[a-z]+)$"></property>-->
+    </bean>
+
+    <bean id="redisHttpSessionConfiguration" class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
+        <property name="maxInactiveIntervalInSeconds" value="1800" />
+        <property name="cookieSerializer" ref="defaultCookieSerializer"/>
+    </bean>
+</beans>
